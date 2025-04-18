@@ -1,26 +1,29 @@
 from PIL import Image
+import sys
 
 
-def imgDimensions(imgName):
-    img = Image.open(imgName)
-    return {"width": img.size[0], "height": img.size[1]}
+def dimensionsAndPixels(imgName):
+    with Image.open(imgName) as img:
+        dimensions = {"width": img.size[0], "height": img.size[1]}
 
-
-def imgPixels(imgName):
     with open(imgName) as file:
         lines = file.readlines()
 
-    allPixels = ""
+    pixels = ""
 
     for line in lines:
         line = line.strip()
         if line.isdigit():
-            allPixels += line
+            pixels += line
 
-    return allPixels
+    if dimensions["width"] * dimensions["height"] == len(pixels):
+        return (dimensions, pixels)
+
+    print("A imagem é inválida!!!")
+    sys.exit(1)
 
 
-def printImage(pixels, dimensions):
+def printImage(dimensions, pixels):
     for i, p in enumerate(pixels):
         if i != 0 and (i + 1) % dimensions["width"] == 0:
             print(p, end="\n")
