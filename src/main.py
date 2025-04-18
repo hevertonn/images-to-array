@@ -1,7 +1,9 @@
 import modules as m
 
-imageName = "myImage.pbm"
+imageName = "images/teste.pbm"
 
-(d, p) = m.dimensionsAndPixels(imageName)
+(dim, px) = m.dimensionsAndPixels(imageName)
 
-m.printImage(d, p)
+m.printImage(dim, px)
+
+print(m.createNpArray(dim, px))

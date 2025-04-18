@@ -1,5 +1,6 @@
 from PIL import Image
 import sys
+import numpy as np
 
 
 def dimensionsAndPixels(imgName):
@@ -29,3 +30,12 @@ def printImage(dimensions, pixels):
             print(p, end="\n")
         else:
             print(p, end="")
+
+
+def createNpArray(dimensions, pixels):
+    pixelsArray = np.empty(dimensions["height"] * dimensions["width"])
+
+    for i, p in enumerate(pixels):
+        pixelsArray[i] = p
+
+    return pixelsArray.reshape(dimensions["height"], dimensions["width"])
